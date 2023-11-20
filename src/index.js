@@ -10,14 +10,18 @@ import 'bootstrap/dist/js/bootstrap'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
 
+import Layout from './pages/Layout';
+import Discover from './pages/discover';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Navigation/>
     <BrowserRouter>
-      <Routes>
-        
-        <Route path="/" element={<App/>}/>
+      <Routes>        
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Discover/>}/>
+          <Route path='movies' element={<App/>}/>  
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

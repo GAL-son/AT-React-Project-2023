@@ -1,0 +1,9 @@
+.gradient-bg {
+    transition-duration: 1000ms;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.468));
+}
+
+.gradient-bg:hover {
+    
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.829));
+}

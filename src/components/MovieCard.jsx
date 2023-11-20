@@ -1,5 +1,10 @@
-import { Link } from "react-router-dom/cjs/react-router-dom";
 import noCover from "../assets/movieNoCover.png"
+import cardStyle from '../css/movieCard.css'
+
+import { Link } from "react-router-dom/cjs/react-router-dom";
+
+
+
 
 const MovieCard = (params) => {
 
@@ -22,13 +27,12 @@ const MovieCard = (params) => {
 
     return (
         //<Link to={""}>
-            <div className="card text-bg-dark rounded-lg" style={styles}>
+            <div className="card text-bg-dark rounded-lg m-2 border-0" style={styles}>
                 <img src={getCover()} className="card-img"></img>
-                <div className="card-img-overlay d-flex flex-column justify-content-end">
-                    <div>
+                <div className="card-img-overlay d-flex flex-column justify-content-end gradient-bg">
+                    <div className="">
                         <h4>{getTitle()}</h4>
-                        <p>{getDescription()}</p>
-                        
+                        <p>{getDescription()}</p>                        
                     </div>  
 
                 </div>
