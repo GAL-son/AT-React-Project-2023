@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom"
+
 import noCover from "../assets/movieNoCover.png"
 import '../css/movieCard.css'
-
-import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const sizes = [
     {
@@ -49,7 +49,7 @@ const MovieCard = (params) => {
     }
 
     return (
-        //<Link to={""}>
+        <Link to="/movie/page">
             <div className="card text-bg-dark rounded-lg m-2 border-0" style={{width: getSize().width}}>
                 <img src={getCover()} className="card-img"></img>
                 <div className="card-img-overlay d-flex flex-column justify-content-end gradient-bg">
@@ -60,7 +60,7 @@ const MovieCard = (params) => {
 
                 </div>
             </div>
-        //</Link>
+        </Link>
     )
 }
 

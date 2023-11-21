@@ -1,10 +1,8 @@
-import noProfileIcon from "../assets/profileNoPicture.png"
-import MovieList from "../components/MovieList";
 import MovieListPreview from "../components/MovieListPreview";
 import ProfileLink from "../components/ProfileLink";
 import ProfilePicture from "../components/ProfilePicture";
 
-const testFriends = [1,2,3,4]
+const testFriends = ['Antony',"Anna123","TestNull","Robert"]
 
 const testParams = {
     username: 'Test123',
@@ -23,7 +21,7 @@ const Profile = (params) => {
                     <h3>Friends</h3>
                         <div className="container-fluid d-flex flex-row">
                             {testFriends.map((x) => 
-                                <ProfileLink username={x}/>
+                                <ProfileLink username={x} profileLink="/profile"/>
                             )}
                         </div>
                     </div>

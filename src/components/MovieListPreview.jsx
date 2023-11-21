@@ -1,5 +1,7 @@
 import MovieCard from "./MovieCard";
 
+import { useState } from "react";
+
 const testPreviewMovies = [
     {
         title: "LMAO",
@@ -43,10 +45,10 @@ const testPreviewMovies = [
     }
 ]
 
-const MovieListPreview = () => {
+const MovieListPreview = (params) => {
 
-    const limit = 6;
-    const size = 2;
+    const [limit, setLimit] = useState((params.limit === undefined) ? 7 : params.limit);
+    const size = 0;
 
     const getArraySliced = () => {
         return testPreviewMovies.slice(0,limit);
@@ -54,15 +56,11 @@ const MovieListPreview = () => {
 
     return (
         <div className="container-fluid overlay-gradient">
-            <p>MovieListPreviw</p>
             <div className="d-flex ">
                 {getArraySliced().map(x => 
                     <MovieCard size={size} title={x.title} description={x.desc}/>    
                 )}
-                <MovieCard title="See More"/>
-            </div>
-            <div className="overlay-content">
-                SEE MORE HERE
+                {(testPreviewMovies.length > limit) ? <MovieCard size={size} title="See More"/> : <></>}
             </div>
             
         </div>

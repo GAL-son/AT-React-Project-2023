@@ -1,5 +1,6 @@
 import searchIcon from "../assets/searchIcon.png"
 
+import '../css/general.css'
 
 import Button from "./Button";
 import ProfileBubble from "./ProfileBubble";
@@ -7,8 +8,8 @@ import ProfileBubble from "./ProfileBubble";
 const Navigation = () => {
 
     return(
-        <nav className="navbar navbar-expand-lg bg-body-tertiary rounded-pill p-1 m-3" >
-            <div className="container-fluid flex-row justify-content">
+        <nav className="navbar navbar-expand-lg bg-color-primary rounded-pill p-1 m-3" >
+            <div className="container-fluid flex-row justify-content-between">
                 <a className="navbar-brand" href="#">Movio</a>
                 <form className="d-flex w-50" role="search">
                     <input className="form-control me-1 rounded-pill" type="search" placeholder="Search movies..." aria-label="Search"/>
