@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,6 +13,7 @@ import Navigation from './components/Navigation';
 
 import Layout from './pages/Layout';
 import Discover from './pages/discover';
+import Profile from './pages/Profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +23,7 @@ root.render(
         <Route path="/" element={<Layout/>}>
           <Route index element={<Discover/>}/>
           <Route path='movies' element={<App/>}/>  
+          <Route path='profile' element={<Profile/>}/>  profile
         </Route>
       </Routes>
     </BrowserRouter>
