@@ -1,14 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-
 import Button from './components/Button';
+import MovieList from './components/MovieList';
 
 function App() {
   return (
     <div className="App">
-      <Button className="btn btn-primary" title="button" onClick={()=>{alert("LMAO")}}/>
+      <MovieList/>
     </div>
   );
 }
