@@ -1,13 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap'
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navigation from './components/Navigation';
+
+import Layout from './pages/Layout';
+import Discover from './pages/Discover';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import MoviePage from './pages/MoviePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>        
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Discover/>}/>
+          <Route path='movies' element={<App/>}/>  
+          <Route path='profile' element={<Profile/>}/>
+          <Route path='login' element={<Login/>}/>
+          <Route path='movie/page' element={<MoviePage/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
