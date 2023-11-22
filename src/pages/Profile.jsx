@@ -1,5 +1,6 @@
 import MovieListPreview from "../components/MovieListPreview";
 import ProfileLink from "../components/ProfileLink";
+import ProfileList from "../components/ProfileList";
 import ProfilePicture from "../components/ProfilePicture";
 
 const testFriends = ['Antony',"Anna123","TestNull","Robert"]
@@ -19,11 +20,7 @@ const Profile = (params) => {
                     <p>{testParams.desc}</p>
                     <div>
                     <h3>Friends</h3>
-                        <div className="container-fluid d-flex flex-row">
-                            {testFriends.map((x) => 
-                                <ProfileLink username={x} profileLink="/profile"/>
-                            )}
-                        </div>
+                        <ProfileList profileList={testFriends}/>
                     </div>
                 </div>
                

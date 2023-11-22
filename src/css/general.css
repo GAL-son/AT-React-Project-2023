@@ -14,3 +14,7 @@
 .rounded-hard{
     border-radius: 2rem;
 }
+
+.rounded-medium {
+    border-radius: 1rem;
+}
