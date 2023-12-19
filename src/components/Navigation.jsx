@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import searchIcon from "../assets/searchIcon.png"
 
 import '../css/general.css'
@@ -10,13 +12,12 @@ const Navigation = () => {
     return(
         <nav className="navbar navbar-expand-lg bg-color-primary rounded-pill p-1 m-3" >
             <div className="container-fluid flex-row justify-content-between">
-                <a className="navbar-brand" href="#">Movio</a>
+                <Link to='/' relative="/" className="navbar-brand" href>Movio</Link>
                 <form className="d-flex w-50" role="search">
                     <input className="form-control me-1 rounded-pill" type="search" placeholder="Search movies..." aria-label="Search"/>
-                    <Button className="btn btn-outline-secondary" type="submit" title={<img src={searchIcon} className="img-fluid mb-1"></img>}/>
+                    <Link><Button className="btn btn-outline-secondary" type="submit" title={<img src={searchIcon} className="img-fluid mb-1"></img>}/></Link>
                 </form>
-                <Button className="btn" data-bs-toggle="dropdown" aria-expanded="false" title={<ProfileBubble />}/>
-
+                <Link to='profile' relative="/"><Button className="btn" data-bs-toggle="dropdown" aria-expanded="false" title={<ProfileBubble />}/></Link>
             </div>
 
             

@@ -12,7 +12,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
 
 import Layout from './pages/Layout';
-import Discover from './pages/Discover';
+import Discover from'./pages/discover';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import MoviePage from './pages/MoviePage';
