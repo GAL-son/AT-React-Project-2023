@@ -49,7 +49,7 @@ const MovieCard = (params) => {
     }
 
     return (
-        <Link to="/movie/page">
+        <Link to="/details" relative="/">
             <div className="card text-bg-dark rounded-lg m-2 border-0" style={{width: getSize().width}}>
                 <img src={getCover()} className="card-img"></img>
                 <div className="card-img-overlay d-flex flex-column justify-content-end gradient-bg">
