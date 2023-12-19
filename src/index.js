@@ -16,6 +16,8 @@ import Discover from './pages/Discover';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import MoviePage from './pages/MoviePage';
+import Register from './pages/Register';
+import AddMovie from './pages/AddMovie';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,8 +28,10 @@ root.render(
           <Route index element={<Discover/>}/>
           <Route path='movies' element={<App/>}/>  
           <Route path='profile' element={<Profile/>}/>
-          <Route path='login' element={<Login/>}/>
-          <Route path='movie/page' element={<MoviePage/>}/>
+          <Route path='signin' element={<Login/>}/>
+          <Route path='signup' element={<Register/>}/>
+          <Route path='details' element={<MoviePage/>}/>
+          <Route path='add' element={<AddMovie/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
