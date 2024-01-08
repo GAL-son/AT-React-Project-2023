@@ -47,20 +47,21 @@ const testPreviewMovies = [
 
 const MovieListPreview = (params) => {
 
+    const {content} = params;
+
     const [limit, setLimit] = useState((params.limit === undefined) ? 7 : params.limit);
     const size = 0;
 
     const getArraySliced = () => {
-        return testPreviewMovies.slice(0,limit);
+        if(content === undefined) return []
+        return content.slice(0,limit);
     }
 
     return (
         <div className="container-fluid overlay-gradient">
             <div className="d-flex ">
-                {getArraySliced().map(x => 
-                    <MovieCard size={size} title={x.title} description={x.desc}/>    
-                )}
-                {(testPreviewMovies.length > limit) ? <MovieCard size={size} title="See More"/> : <></>}
+                {getArraySliced().map((movie) => <MovieCard size={size} id={movie.id} cover={movie.image} title={movie.title} description={movie.content} />)}
+                {(testPreviewMovies.length > limit) ? <MovieCard link={params.seeMore} size={size} title="See More"/> : <></>}
             </div>
             
         </div>

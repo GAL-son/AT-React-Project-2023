@@ -1,5 +1,11 @@
+import { useState, useEffect } from 'react';
+
+import { getMovies } from "../api";
+
 import ActivityList from "../components/ActivityList";
 import MovieListPreview from "../components/MovieListPreview";
+
+
 
 const fakeActivity = [
     {
@@ -17,23 +23,43 @@ const fakeActivity = [
 ]
 
 const Discover = () => {
+
+    const [newMovies, setNewMovies] = useState([])
+    const [popularMovies, setPopulatMovies] = useState([])
+
+    useEffect(() => {
+        try {
+            getMovies()
+                .then(movies => {
+                    setNewMovies(movies);
+                    setPopulatMovies(movies.filter(x => {
+                        const rand = Math.random();
+                        return rand > 0.6;
+                    }).sort((a, b) => 0.5 - Math.random()));
+                });
+        } catch {
+            setNewMovies([])
+        }
+    }, [])
+
     return(
         <div className="container-fluid m-2">
             <h1>Discover</h1>
-            <div className="container-fluid d-flex">
-                <div className="">
+            <div className="container-fluid d-flex flex-column">
+                <div className="w-100">
                     <h3>New movies</h3>
-                    <div><MovieListPreview limit="3"/></div>
+                    <div><MovieListPreview limit="7" content={newMovies} seeMore="movies"/></div>
                 </div>
                 <div  className="">
-                    <h3>Popular movies</h3>
-                    <div><MovieListPreview limit="3"/></div>
+                    <h3>Random movies</h3>
+                    <div><MovieListPreview content={popularMovies} seeMore={"movies"} limit="7"/></div>
                 </div>
             </div>
-            <div className="container-fluid mt-4">
+            {// API FEATURE NOT IMPLEMENTED
+            /* <div className="container-fluid mt-4">
                 <h3>Friends Activity</h3>
                 <ActivityList activities={fakeActivity}/>
-            </div>
+            </div> */}
         </div>
     )
 }

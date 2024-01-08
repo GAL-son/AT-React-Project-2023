@@ -9,7 +9,7 @@ const MovieCover = (params) =>
     }
 
     return (
-        <div className="card border-0 ms-0 me-3  rounded-medium">
+        <div className="card border-0 ms-0 me-3  rounded-medium" style={params.style}>
             <img src={getCover()} className="card-img  rounded-medium"></img>
         </div>
     )
