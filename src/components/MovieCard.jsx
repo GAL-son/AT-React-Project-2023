@@ -68,6 +68,7 @@ const MovieCard = (params) => {
 
         while(dsc.length < 40) {
             dsc += words[0] + " ";
+            if(dsc.length >= params.description.length) return dsc;
             words = words.slice(1)
         }
 

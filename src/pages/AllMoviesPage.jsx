@@ -35,7 +35,7 @@ const AllMoviesList = () => {
     }, [])
 
     return(
-        <MovieList size={1} content={movies.filter(getSearchFunction())}/>
+        <MovieList size={3} content={movies.filter(getSearchFunction())}/>
     )
 }
 
