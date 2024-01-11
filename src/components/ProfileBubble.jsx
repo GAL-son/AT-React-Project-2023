@@ -9,19 +9,19 @@ const ProfileBubble = (params) => {
         if (params.loggedIn) {
             return(
                 <>
-                    <span className="me-2">params.name</span>
+                    <span className="me-2">{params.name}</span>
                     <ProfilePicture style={{height: '1.7rem'}}/>    
                 </>
             )
         } else {
             return (
-                <span className="me-2">Login</span>
+                <span className="">Login</span>
             )
         }
     }
 
     return(
-        <div style={{height: "2rem"}} className="m-0 p-0 d-flex flex-row align-items-center">
+        <div style={{height: "2rem"}} className="m-0 p-0 d-flex flex-row align-items-center justify-content-center">
             {renderInside()}
         </div>
     )

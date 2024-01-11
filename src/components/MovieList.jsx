@@ -1,7 +1,17 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { isExpired, decodeToken  } from "react-jwt";
+
 import MovieCard from './MovieCard';
+import Button from './Button';
+
+import plusIcon from '../assets/plusIcon.png';
+import minusIcon from '../assets/minusIcon.png';
 
 const MovieList = (params) => {
     const movies = params.content
+    const [size, setsize] = useState(1)
+    const [loggedIn, setLoggedIn] = useState(!isExpired(localStorage.getItem('token')));
 
     const getParamSearch = () => {
         if(params.search == undefined) {
@@ -11,17 +21,15 @@ const MovieList = (params) => {
         }
     }
 
-    const getList = () => {
-        if(movies.length == 0) {
-            return(<h3>NO MOVIES</h3>)
-        } else {
-            return(
-                <div className="d-flex flex-row flex-wrap justify-content-center" >
-                    {movies.filter(getParamSearch()).map((movie) => <MovieCard style={defaultStyle} size={params.size} cover={movie.image} title={movie.title} description={movie.content} id={movie.id} />)}
-                </div>
-            )
-        }
-    } 
+    // const getList = () => {
+    //     if(movies.length == 0) {
+    //         return()
+    //     } else {
+    //         return(
+                
+    //         )
+    //     }
+    // } 
 
     const defaultStyle = {
         width: '10rem'
@@ -29,10 +37,23 @@ const MovieList = (params) => {
 
     return(        
         <div>
-            <div>
-                List controls
+            <div className='d-flex flex-row justify-content-around'>
+                <div className='mb-2'>
+                    <span className='ms-2 me-2'>Icon size:</span>
+                    <Button className={" btn-outline-secondary btn-sm align-items-center " + ((size == 1) ? "disabled" : "")} title={<img src={minusIcon} style={{height:12}} className="img-fluid mb-1"></img>} onClick={() => {setsize((size == 1) ? 1 : size-1)}}></Button>
+                    <span className='ms-2 me-2'>{size}</span>
+                    <Button className={" btn-outline-secondary btn-sm align-items-center " + ((size == 4) ? "disabled" : "")} title={<img src={plusIcon} style={{height:12}} className="img-fluid mb-1"></img>} onClick={() => {setsize((size == 4) ? 4 : size+1)}}></Button>
+                </div>
+                {(loggedIn) && 
+                <div>
+                <Link to="/add"><Button className="btn-sm btn-outline-secondary" title={<div><span>ADD MOVIE </span></div>}/></Link>
+            </div>}
             </div>
-                {getList()}
+                {(movies.length == 0) ? <h3>NO MOVIES</h3> : 
+                    <div className="d-flex flex-row flex-wrap justify-content-center" >
+                        {movies.filter(getParamSearch()).map((movie) => <MovieCard style={defaultStyle} size={size-1} year={movie.productionYear} cover={movie.image} genre={movie.genre} rate={movie.rate} title={movie.title} description={movie.content} id={movie.id} />)}
+                    </div>
+                }
             <div>
                 pagination here
             </div>

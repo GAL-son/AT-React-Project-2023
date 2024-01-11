@@ -31,14 +31,15 @@ const Discover = () => {
         try {
             getMovies()
                 .then(movies => {
-                    setNewMovies(movies);
-                    setPopulatMovies(movies.filter(x => {
-                        const rand = Math.random();
-                        return rand > 0.6;
-                    }).sort((a, b) => 0.5 - Math.random()));
+                    setPopulatMovies(movies.sort((a, b) => 0.5 - Math.random()));
+                    setNewMovies(movies.sort((a,b) => {
+                        return b.productionYear - a.productionYear;
+                    }));
+                  
                 });
         } catch {
             setNewMovies([])
+            setPopulatMovies([])
         }
     }, [])
 

@@ -6,46 +6,31 @@ import ProfileList from "../components/ProfileList";
 
 import '../css/moviePage.css'
 import { getMovieDetails } from "../api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Button from "../components/Button";
+import { isExpired, decodeToken  } from "react-jwt";
 
-const testUsers = ["Galson", "Anna", "Persiciara", "Sol"]
+import { deleteMovie } from "../api";
 
 
 
 const MoviePage = (params) => {
-
+    const navigate = useNavigate()
     const { id } = useParams();
     const [movieData, setMovieData] = useState({})
     const [pageLoaded, setLoaded] = useState(false)
     const [loadedText, setLoadedText] = useState("Loading...") 
-    // const []
+    const [loggedIn, setLoggedIn] = useState(!isExpired(localStorage.getItem('token')));
+    const [errors, setErrors] = useState("")
+
+    const getData = (data, def) => {
+        if(data == '' || data == undefined) {
+            return def;
+        } else {
+            return data;
+        }
+    }
     
-    const getMovieCover = () => {
-        if(movieData.image == '') {
-            return undefined
-        } else {
-            return movieData.image;
-        }
-    }
-
-    const getMovieTitle = () => {
-        if(movieData.title == '' || movieData.title === undefined) {
-            return "NO TITLE"
-        } else {
-            return movieData.title;
-        }
-        
-    }
-
-    const getMovieDesc = () => {
-        if(movieData.conntent == '') {
-            return "NO DESCRIPTION"
-        } else {
-            return movieData.content;
-        }
-        
-    }
-
     useEffect(()=>{
         console.log(id)
         getMovieDetails(id)
@@ -57,22 +42,41 @@ const MoviePage = (params) => {
                 console.error(err)});
     },[])
 
+    const handleDelete = () => {
+        deleteMovie(id)
+        .then(() => {
+            navigate("/movies");
+        })
+        .catch((err) => {
+            const errorMessages = err.response.data;
+            setErrors(errorMessages);
+        })
+    }
+
     const getLoadedPage = () => {
         return (
             <>
+             {(errors != "") && 
+            <div className='mb-3 alert alert-danger'>
+                Error occurred! - {errors}
+            </div>}
             <div className="container-fluid d-flex flex-row mb-3">
                 <div className="">
-                    <MovieCover cover={getMovieCover()} style={{width: '15rem'}}/>
+                    <MovieCover cover={getData(movieData.image, undefined)} style={{width: '15rem'}}/>
                 </div>
-                <div className="flex-grow">
-                    <h1 className="mb-4">{getMovieTitle()}</h1>
-                    {// API FEATURE NOT IMPLEMENTED
-                    /* <div className="d-flex flex-row justify-content-between" id="aditional-info">
-                        <span>Year: 1999</span><span>Lenght: 2h 69m</span><span>Country: Denmark</span>
-                    </div> */}
-                    <p className="text-wrap" style={{fontSize:'1.3rem'}}>{getMovieDesc()}</p>
+                <div className="flex-grow-1">
+                    <h1 className="mb-4">{getData(movieData.title, "No title")}</h1>
+                    {/* // API FEATURE NOT IMPLEMENTED */}
+                    <div className="d-flex flex-row justify-content-around" id="aditional-info">
+                        <span>Year: {getData(movieData.productionYear, "No data")}</span><span>Genre: {getData(movieData.genre, "No data")}</span><span>Score: {getData(movieData.rate, "Not rated")}</span>
+                    </div>
+                    <p className="text-wrap" style={{fontSize:'1.3rem'}}>{getData(movieData.content, "No description")}</p>
                 </div>
             </div>
+            {(loggedIn) && 
+            <div>
+                <Button onClick={handleDelete} className=" btn btn-danger" title="DELETE MOVIE"></Button>
+            </div>}
             {// API FEATURE NOT IMPLEMENTED
             /* <div className="mb-2">
                 <h4>Watcheed by:</h4>

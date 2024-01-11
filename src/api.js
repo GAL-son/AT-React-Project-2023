@@ -20,23 +20,25 @@ export function getMovieDetails(id) {
         .catch(err => {throw err})
 }
 
-export function postMovie(title, img, content) {
-    axios.post(getAPIEndpoint("movies"), {
+export function postMovie(title, img, content, genre="", rate="", year="") {
+    return axios.post(getAPIEndpoint("movies"), {
         title: title,
         image: img,
-        content: content
+        content: content,
+        genre: genre,
+        rate: rate,
+        productionYear: year
     })
-        .then(console.log)
+        .then(res => {return res.data})
         .catch(err => {throw err})
 }
 
 export function deleteMovie(id) {
-    axios.delete(getAPIEndpoint(`movies/${id}`), {
-        'Accept': 'application/json',
-        'Content-Type': ' application/json',
-        'x-auth-token': localStorage.getItem('token')
-    })
-        .then(console.log)
+    return axios.delete(getAPIEndpoint(`movie/${id}`), {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+    }})
+        .then(res => {return res.data;})
         .catch(err => {throw err})
 }
 

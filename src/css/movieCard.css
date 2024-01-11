@@ -1,11 +1,11 @@
 .gradient-bg {
     transition-duration: 1000ms;
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.468));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.727));
 }
 
 .gradient-bg:hover {
-    
-    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.829));
+    transition-duration: 1000ms;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.242), rgb(0, 0, 0));
 }
 
 

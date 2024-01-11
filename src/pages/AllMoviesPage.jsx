@@ -8,6 +8,7 @@ import MovieList from '../components/MovieList'
 const AllMoviesList = () => {
 
     const {search} = useParams()
+    const {sort} = useParams()
     const [movies, setMovies] = useState([])
 
     const getSearchFunction = () => {
@@ -26,6 +27,16 @@ const AllMoviesList = () => {
         }
     }
 
+    const getSortFunction = () => {
+        if(sort === undefined || sort == "") {
+            return (a,b) => {return 0}
+        } else {
+            return ((a,b) => {
+                return b[sort] - a[sort]
+            })
+        }
+    }
+
     useEffect(() => {
         try {
             getMovies().then(movies => {setMovies(movies)})
@@ -35,7 +46,7 @@ const AllMoviesList = () => {
     }, [])
 
     return(
-        <MovieList size={3} content={movies.filter(getSearchFunction())}/>
+        <MovieList content={movies.filter(getSearchFunction()).sort(getSortFunction())}/>
     )
 }
 
