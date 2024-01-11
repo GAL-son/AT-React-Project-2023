@@ -88,7 +88,8 @@ const Register = () => {
         }
     }
 
-    const handleSendForm = async () => {
+    const handleSendForm = async (e) => {
+        e.preventDefault()
         if(!formValidClass) {
             // CAN SHOW PROPMT
             return;

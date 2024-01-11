@@ -21,6 +21,7 @@ const MoviePage = (params) => {
     const [pageLoaded, setLoaded] = useState(false)
     const [loadedText, setLoadedText] = useState("Loading...") 
     const [loggedIn, setLoggedIn] = useState(!isExpired(localStorage.getItem('token')));
+    const [user, setUser] = useState(decodeToken(localStorage.getItem('token')));
     const [errors, setErrors] = useState("")
 
     const getData = (data, def) => {
@@ -73,7 +74,7 @@ const MoviePage = (params) => {
                     <p className="text-wrap" style={{fontSize:'1.3rem'}}>{getData(movieData.content, "No description")}</p>
                 </div>
             </div>
-            {(loggedIn) && 
+            {(loggedIn) && (user.role == "admin") && 
             <div>
                 <Button onClick={handleDelete} className=" btn btn-danger" title="DELETE MOVIE"></Button>
             </div>}

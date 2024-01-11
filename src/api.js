@@ -61,3 +61,9 @@ export function authUser(login, password) {
         .then(response => {return response.data})
         .catch(err => {throw err})
 }
+
+export const logoutUser = (userId) => {
+    return axios.delete(getAPIEndpoint(`user/logout/${userId}`))
+        .then(res => {return res})
+        .catch(err => {throw err})
+}
