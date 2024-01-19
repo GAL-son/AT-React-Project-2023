@@ -27,7 +27,7 @@ function App() {
             <Route path="/" element={<Layout/>}>
               <Route index element={<Discover/>}/>
               {/* <Route path='movies' element={<AllMovuesPage/>}/>   */}
-              <Route path='movies/:search?/:sort?' element={<AllMovuesPage/>}/>  
+              <Route path='movies' element={<AllMovuesPage/>}/>  
               <Route path='profile' element={<Profile/>}/>
               <Route path='signin' element={<Login/>}/>
               <Route path='signup' element={<Register/>}/>

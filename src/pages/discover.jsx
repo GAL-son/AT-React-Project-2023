@@ -6,33 +6,26 @@ import ActivityList from "../components/ActivityList";
 import MovieListPreview from "../components/MovieListPreview";
 
 
-
-const fakeActivity = [
-    {
-        userName: "Galson",
-        activ: "Is planing to watch",
-        title: "Transformers 2: Revenge of the Fallen",
-        date: "21-11-2023"
-    },
-    {
-        userName: "Galson",
-        activ: "Watched",
-        title: "Avengers: Endgame",
-        date: "02-11-2023"
-    }
-]
-
 const Discover = () => {
 
     const [newMovies, setNewMovies] = useState([])
     const [popularMovies, setPopulatMovies] = useState([])
 
+    const newMoviesLink = () => {
+        const url = new URL("https://localhost:3000/movies/")
+        url.searchParams.append("sort", "year")
+
+        return url.href //.replace("https://localhost:3000/", "")
+    } 
+
     useEffect(() => {
         try {
             getMovies()
-                .then(movies => {
-                    setPopulatMovies(movies.sort((a, b) => 0.5 - Math.random()));
-                    setNewMovies(movies.sort((a,b) => {
+                .then(movies => {                    
+                    // console.info(movies)
+                    // console.info([...movies].sort((a, b) => {return 0.5 - Math.random()}))
+                    setPopulatMovies([...movies].sort((a, b) => 0.5 - Math.random()));
+                    setNewMovies([...movies].sort((a,b) => {
                         return b.productionYear - a.productionYear;
                     }));
                   
@@ -43,17 +36,19 @@ const Discover = () => {
         }
     }, [])
 
+
+
     return(
         <div className="container-fluid m-2">
             <h1>Discover</h1>
             <div className="container-fluid d-flex flex-column">
                 <div className="w-100">
                     <h3>New movies</h3>
-                    <div><MovieListPreview limit="7" content={newMovies} seeMore="movies"/></div>
+                    <div><MovieListPreview limit="6" content={newMovies} seeMore={"movies"} search={"?sort=productionYear"} size="2"/></div>
                 </div>
                 <div  className="">
                     <h3>Random movies</h3>
-                    <div><MovieListPreview content={popularMovies} seeMore={"movies"} limit="7"/></div>
+                    <div><MovieListPreview content={popularMovies} limit="6" size="2"/></div>
                 </div>
             </div>
             {// API FEATURE NOT IMPLEMENTED

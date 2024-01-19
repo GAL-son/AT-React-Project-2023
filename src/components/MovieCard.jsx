@@ -8,29 +8,29 @@ const sizes = [
     {
         width: '7rem',
         height: '10.5rem',
-        textMain: '0.7rem',
-        textSub: '0.6rem',
+        textMain: '0.8rem',
+        textSub: '0.7rem',
         charLimit: 0,
     },
     {
         width: '9rem',
         height: '13.5rem',
-        textMain: '1.0rem',
-        textSub: '0.5rem',
+        textMain: '1.1rem',
+        textSub: '0.6rem',
         charLimit: 20,
     },
     {
         width: '11rem',
         height: '16.5rem',
-        textMain: '1.2rem',
-        textSub: '0.6rem',
+        textMain: '1.3rem',
+        textSub: '0.7rem',
         charLimit: 45,
     },
     {
         width: '13rem',
         height: '19.5rem',
-        textMain: '1.5rem',
-        textSub: '0.8rem',
+        textMain: '1.6rem',
+        textSub: '0.9rem',
         additionalInfo: "0.6rem",
         charLimit: 50
     },
@@ -43,7 +43,8 @@ const MovieCard = (params) => {
     const getLink = () => {
         if(linkOveride !== undefined) {
             return {
-                pathname: "/"+linkOveride
+                pathname: "/"+linkOveride,
+                search: params.search,
             }
         } else {
             return {
@@ -99,7 +100,7 @@ const MovieCard = (params) => {
         <Link to={getLink()}
         onClick={() => {console.info(getId())}}>
             <div className="card text-bg-dark rounded-lg m-2 border-0" style={{width: getSize().width, height:getSize().height}}>
-                <img src={getCover()} onError={({currentTarget}) => {currentTarget.onError = null; currentTarget.src=noCover}} className="card-img" style={{objectFit: "cover", width: '100%', height: "100%"}}></img>
+                <img src={getCover()} alt={getTitle() + " cover"} onError={({currentTarget}) => {currentTarget.onError = null; currentTarget.src=noCover}} className="card-img" style={{objectFit: "cover", width: '100%', height: "100%"}}></img>
                 <div className="card-img-overlay d-flex flex-column justify-content-end gradient-bg">
                         <h4 className="m-0" style={{fontSize: getSize().textMain, margin:0, marginBottom:2, borderBlockEnd: "1px white"}}>{getTitle()}</h4>
                         {(size != 0) && <p className="mt-3" style={{fontSize: getSize().textSub, margin:-5,}}>{getDescription()}</p> }    

@@ -1,6 +1,6 @@
 .gradient-bg {
     transition-duration: 1000ms;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.727));
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.446));
 }
 
 .gradient-bg:hover {
@@ -8,4 +8,6 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.242), rgb(0, 0, 0));
 }
 
-
+.card-img-overlay * {
+    text-shadow: 0px 2px 3px rgba(0, 0, 0, 1);
+}

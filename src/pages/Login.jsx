@@ -8,8 +8,8 @@ const Login = () => {
     const navigate = useNavigate()
     const [loginField, setLoginField] = useState("");
     const [passwdField, setPasswdField] = useState("");
-    const [validLogin, setValidLogin] = useState(null);
-    const [passwdValid, setPasswdValid] = useState(null);
+    // const [validLogin, setValidLogin] = useState(null);
+    // const [passwdValid, setPasswdValid] = useState(null);
 
     const formValid = useRef([false, false]);
     const [formValidClass, setFormValidClass] = useState(false)
@@ -17,15 +17,15 @@ const Login = () => {
     const [errors, setErrors] = useState("")
 
     useEffect(() => {
-        const valid = (loginField.length != 0)
-        setValidLogin(valid)
+        const valid = (loginField.length !== 0)
+        // setValidLogin(valid)
         updateFormValid(0, resolveNull(valid, false));
     }, [loginField])
 
 
     useEffect(() => {
         const valid = passwdField.length !== 0
-        setPasswdValid(valid);
+        // setPasswdValid(valid);
         updateFormValid(1, resolveNull(valid, false));
     }, [passwdField])
 
@@ -94,31 +94,27 @@ const Login = () => {
             <div className='d-flex flex-column align-items-center' id="login-card">
                 <h2>Email</h2>
                 <form action="">
-                {(errors != "") && 
+                {(errors !== "") && 
                     <div className='mb-3 alert alert-danger'>
                         Error occurred! - <span>{errors}</span>
                     </div>}
                     
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Login</label>
-                    <input type="text" className={"form-control "+ validateField()} id="exampleInputEmail1" aria-describedby="emailHelp" value={loginField} onChange={e=> {setLoginField(e.target.value)}}/>
+                    <label for="InputEmail" className="form-label">Login</label>
+                    <input type="text" className={"form-control "+ validateField()} id="InputEmail" aria-describedby="loginhelp" value={loginField} onChange={e=> {setLoginField(e.target.value)}}/>
                     <div class="invalid-feedback">
                         Please enter login.
                     </div>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Password</label>
-                    <input type="password" className={"form-control "+ validateField(passwdField)} id="exampleInputPassword1" value={passwdField} onChange={e => {setPasswdField(e.target.value)}}/><div class="invalid-feedback">
+                    <label for="InputPassword" className="form-label">Password</label>
+                    <input type="password" className={"form-control "+ validateField(passwdField)} id="InputPassword" value={passwdField} onChange={e => {setPasswdField(e.target.value)}}/><div class="invalid-feedback">
                         Please enter password.
                     </div>
                 </div>
-                {/* <div className="mb-3 form-check">
-                    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> */}
                 <div className='d-flex justify-content-between'>
                     <Link to='../signup' type='button' className='btn rounded-pill'>I dont have an account...</Link>
-                    <button type="submit" onClick={handleLogin} className={"btn btn-success rounded-pill " + ((!formValidClass) ? "disabled" : "")}>Submit</button>
+                    <button type="submit" onClick={handleLogin} className={"btn btn-success rounded-pill " + ((!formValidClass) ? "disabled" : "")}>Login</button>
                 </div>
                 </form>
             </div>

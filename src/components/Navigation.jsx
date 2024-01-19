@@ -22,8 +22,7 @@ const Navigation = () => {
     useEffect(() => {
         setLoggedIn(!isExpired(localStorage.getItem('token')));
     }, [])
-
-    
+  
 
     const handleProfilePath = () => {
         if(loggedIn) {
@@ -35,8 +34,12 @@ const Navigation = () => {
 
     const handleSearch = (e) => {        
         e.preventDefault();
-        const searchLink = searchState.replace(' ', '+')
-        navigate("/movies/"+searchLink);
+        const url = new URL("https://localhost:3000/movies/")
+        if(searchState!='') {
+            url.searchParams.append("search", searchState)
+        }
+        console.log(url.href)
+        navigate(url.href.replace("https://localhost:3000/", ""));
     }
 
     return(

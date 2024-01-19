@@ -1,40 +1,51 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { getMovies } from '../api';
 
 
 import MovieList from '../components/MovieList'
 
 const AllMoviesList = () => {
-
-    const {search} = useParams()
-    const {sort} = useParams()
+    
+    const [URLParams, setURLParams] = useSearchParams();
+    const [pageChange, setPageChange] = useState(false)
     const [movies, setMovies] = useState([])
 
-    const getSearchFunction = () => {
-        if(search === undefined || search =='') {
-            return  (x) => {return true};
-        } else {
-            return ((x) => {
-                const words = search.toLowerCase().split('+');
-                // const titleWords = 
-                // const descWords = 
+    useEffect(() => {setPageChange(!pageChange)}, [URLParams])
 
-                const movieWords = x.title.toLowerCase().split(' ').concat(x.content.toLowerCase().split(" "))
-                console.log(movieWords)
-                return movieWords.some(item => words.includes(item))
+    const getSearchFunction = () => {
+        let search = URLParams.get("search")
+        console.log(URLParams)
+        console.log(search)
+
+        if(search === undefined || search ==='' || search == null) {
+            console.log("EMPTY SEARCH")
+            return ((x) => {return true});
+        } else {
+            console.log("SEARCH BY -", search)
+            return ((x) => {
+                const words = search.toLowerCase().split(' ');
+                const movieWords = x.title.toLowerCase().replace(/[^0-9a-z ]/gi, '').split(' ').concat(x.content.toLowerCase().replace(/[^0-9a-z ]/gi, '').split(" "))
+
+
+
+                return movieWords.some(item => words.includes(item)) || (x.title).toLocaleLowerCase().search(search.toLowerCase()) !== -1;
             })
-        }
+        }        
     }
 
-    const getSortFunction = () => {
-        if(sort === undefined || sort == "") {
-            return (a,b) => {return 0}
-        } else {
-            return ((a,b) => {
-                return b[sort] - a[sort]
-            })
+    const getSort = () => {
+        const sortParam = URLParams.get("sort")
+        if(sortParam === undefined) {
+            return (a,b) => {return 0};
         }
+
+        const newFn = (a,b) => {
+            // console.log(sortParam)
+            return b[sortParam] - a[sortParam];
+        }
+        // console.log("NEWFN - ",newFn)
+        return newFn;
     }
 
     useEffect(() => {
@@ -46,7 +57,7 @@ const AllMoviesList = () => {
     }, [])
 
     return(
-        <MovieList content={movies.filter(getSearchFunction()).sort(getSortFunction())}/>
+        <MovieList filter={getSearchFunction()} sort={getSort()} content={movies}/>
     )
 }
 
